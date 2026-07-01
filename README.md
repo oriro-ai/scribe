@@ -7,7 +7,7 @@
 Built inside the [ORIRO](https://github.com/oriro-ai) CLI, now open for everyone. Zero runtime dependencies. Pure Node/TypeScript. Everything stays on your machine.
 
 
-## The problem: AI has amnesia
+## The problem: AI has "Amnesia"
 
 Every AI assistant forgets the moment a session ends. The decisions you made, the files you changed, the bug you finally cracked, the approach you agreed on gone. Tomorrow you re-explain, re-paste, re-derive. The model that felt like a capable collaborator yesterday shows up today as a stranger.
 
