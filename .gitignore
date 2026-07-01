@@ -1,0 +1,6 @@
+node_modules/
+*.log
+.DS_Store
+npm-debug.log*
+# dist/ is committed on purpose so `npm install github:oriro-ai/scribe` works with no build step.
+package-lock.json

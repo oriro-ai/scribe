@@ -1,0 +1,56 @@
+{
+  "name": "@oriro/scribe",
+  "version": "1.0.0",
+  "description": "Local-first, consent-gated, redacted, crash-safe memory for AI routers — so any model stays in context across sessions. Zero dependencies, pure Node.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "test": "npm run build && node test/smoke.mjs",
+    "demo": "node examples/quick-start.mjs"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "memory",
+    "context",
+    "router",
+    "journal",
+    "local-first",
+    "privacy",
+    "redaction",
+    "oriro",
+    "scribe"
+  ],
+  "author": "ORIRO (oriro-ai)",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oriro-ai/scribe.git"
+  },
+  "homepage": "https://github.com/oriro-ai/scribe#readme",
+  "bugs": {
+    "url": "https://github.com/oriro-ai/scribe/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4"
+  }
+}
