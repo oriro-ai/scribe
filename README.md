@@ -171,7 +171,7 @@ Override the location with `ORIRO_SCRIBE_DIR` (the scribe store) or `ORIRO_STATE
 
 ---
 
-Most of the industry is racing to make models *smarter for one prompt*. Scribe is a different bet: that the thing between a clever assistant and a genuine collaborator is **continuity** — remembering the work, privately, and carrying it forward. Turn it on once; from then on, the work remembers itself.
+Most of the industry is racing to make models *smarter for one prompt*. Scribe is a different bet: that the thing between a clever assistant and a genuine collaborator is **continuity** remembering the work, privately, and carrying it forward. Turn it on once; from then on, the work remembers itself.
 
 **Built by ORIRO. Open to all.** Issues and PRs welcome.
 
