@@ -40,7 +40,7 @@ import { setScribeConsent, scribeTurn, buildContext, searchScribe } from "@oriro
 
 setScribeConsent(true);                          // opt in (Scribe is OFF by default)
 
-// record a completed turn secrets/PII are redacted BEFORE anything touches disk
+// record a completed turn — secrets/PII are redacted BEFORE anything touches disk
 scribeTurn({
   user: "wire the payment webhook",
   note: "added the handler in webhook.ts",
@@ -48,14 +48,14 @@ scribeTurn({
   tools: ["Edit"],
 });
 
-// NEXT session fold this into your prompt so the model starts already in context const context = buildContext();
+// NEXT session — fold this into your prompt so the model starts already in context
+const context = buildContext();
 
-// recall past work on demand (great behind a `scribe_recall` tool your model can call) const hits = searchScribe("payment webhook");
-
+// recall past work on demand (great behind a `scribe_recall` tool your model can call)
+const hits = searchScribe("payment webhook");
+```
 
 Run the live demo: `node examples/quick-start.mjs`.
-
-
 
 ## What you get
 
