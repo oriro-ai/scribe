@@ -6,7 +6,6 @@
 
 Built inside the [ORIRO](https://github.com/oriro-ai) CLI, now open for everyone. Zero runtime dependencies. Pure Node/TypeScript. Everything stays on your machine.
 
----
 
 ## The problem: AI has amnesia
 
