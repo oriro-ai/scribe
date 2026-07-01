@@ -1,7 +1,7 @@
 {
   "name": "@oriro/scribe",
   "version": "1.0.0",
-  "description": "Local-first, consent-gated, redacted, crash-safe memory for AI routers — so any model stays in context across sessions. Zero dependencies, pure Node.",
+  "description": "Local-first, consent-gated, redacted, crash-safe memory for AI routers, so any model stays in context across sessions. Zero dependencies, pure Node.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

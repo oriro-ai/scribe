@@ -1,6 +1,6 @@
-// ORIRO Scribe — retrieval (5A.4). The router/user can pull any past entry on demand:
+// ORIRO Scribe, retrieval (5A.4). The router/user can pull any past entry on demand:
 // the timeline skeleton (every day, injected) + full-text search across all journals +
-// direct day reads. Deterministic, local, model-agnostic — works for any router.
+// direct day reads. Deterministic, local, model-agnostic, works for any router.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { journalFile, scribeDir } from "./paths.js";
 /** All recorded days (YYYY-MM-DD), oldest → newest. */

@@ -1,4 +1,4 @@
-// ORIRO Scribe — health + fault log for the supervised writer (5A.3). Deterministic,
+// ORIRO Scribe, health + fault log for the supervised writer (5A.3). Deterministic,
 // local, no LLM. The Medic records faults here and the heartbeat proves liveness.
 import { closeSync, fsyncSync, mkdirSync, openSync, readFileSync, writeFileSync, writeSync, } from "node:fs";
 import { join } from "node:path";

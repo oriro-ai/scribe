@@ -6,7 +6,7 @@ export interface ScribeTurnInput {
     note?: string;
     context?: string;
 }
-/** Scribe one completed turn — gated on consent; never throws (supervisedCapture guarantees it). */
+/** Scribe one completed turn, gated on consent; never throws (supervisedCapture guarantees it). */
 export declare function scribeTurn(input: ScribeTurnInput): void;
 export declare function noteUserInput(text: string): void;
 export declare function takePendingUserInput(): string;

@@ -1,4 +1,4 @@
-// ORIRO Scribe — durable journal writer. Append is synchronous + fsync'd so a
+// ORIRO Scribe, durable journal writer. Append is synchronous + fsync'd so a
 // captured turn is never lost (100%, not the 99% an async buffer risks on crash).
 import {
   closeSync,

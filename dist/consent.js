@@ -1,10 +1,10 @@
-// ORIRO Scribe — consent gate. The scribe ships dormant: it records and injects
+// ORIRO Scribe, consent gate. The scribe ships dormant: it records and injects
 // NOTHING until the user explicitly says Yes. Consent is local, inspectable, and
-// reversible (oriro scribe on|off). Default = false (off) when unset — never forced.
+// reversible (oriro scribe on|off). Default = false (off) when unset, never forced.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { CONFIG_DIR } from "./config.js";
-// Production: ~/.oriro/scribe.json (sibling of the data dir — a "No" creates no
+// Production: ~/.oriro/scribe.json (sibling of the data dir, a "No" creates no
 // data dir). Tests/demos: consent.json inside the ORIRO_SCRIBE_DIR override.
 function consentFile() {
     const override = process.env.ORIRO_SCRIBE_DIR?.trim();

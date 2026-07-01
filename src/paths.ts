@@ -1,4 +1,4 @@
-// ORIRO Scribe — local-only storage paths. Everything lives under the user's
+// ORIRO Scribe, local-only storage paths. Everything lives under the user's
 // ~/.oriro/scribe/ (Cardinal Rule 2: never leaves the machine). The
 // ORIRO_SCRIBE_DIR override exists for tests/demos so they never touch real state.
 import { join } from "node:path";

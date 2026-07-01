@@ -1,9 +1,9 @@
-// ORIRO Scribe — the 3-role supervised writer (5A.3). Deterministic, in-process, free:
+// ORIRO Scribe, the 3-role supervised writer (5A.3). Deterministic, in-process, free:
 //   Primary  = first write attempt.
 //   Standby  = instant retry if Primary throws (zero loss; entry already in the WAL).
 //   Medic    = logs the fault, heals the backlog by replaying any pending WAL entries,
 //              and (since each entry stays in the WAL until committed) recovers across
-//              crashes/restarts — no human, no LLM.
+//              crashes/restarts, no human, no LLM.
 // It NEVER throws to the caller: a scribe failure can never break the user's turn.
 import { captureTurn, redactRecord, type CaptureResult, type TurnRecord } from "./capture.js";
 import { recordFault, recordHealth } from "./health.js";
@@ -42,7 +42,7 @@ export function supervisedCapture(rec: TurnRecord): CaptureResult | null {
   try {
     drainBacklog();
     const id = uid(rec.ts);
-    // Redact BEFORE the WAL append — the WAL must never hold raw secrets (it persists the record
+    // Redact BEFORE the WAL append, the WAL must never hold raw secrets (it persists the record
     // for crash replay). Redaction is idempotent, so captureTurn re-redacting the same record is a
     // no-op; replay stays correct.
     const safe = redactRecord(rec).rec;

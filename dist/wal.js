@@ -1,6 +1,6 @@
-// ORIRO Scribe — write-ahead log (5A.3). Every turn is recorded as durable "pending"
+// ORIRO Scribe, write-ahead log (5A.3). Every turn is recorded as durable "pending"
 // BEFORE the journal write, and marked "commit" after. A crash or a failed write leaves
-// the entry pending, so the supervisor replays it next turn — zero loss, ever.
+// the entry pending, so the supervisor replays it next turn, zero loss, ever.
 import { closeSync, existsSync, fsyncSync, mkdirSync, openSync, readFileSync, writeFileSync, writeSync, } from "node:fs";
 import { join } from "node:path";
 import { scribeDir } from "./paths.js";

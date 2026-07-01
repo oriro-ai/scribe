@@ -1,4 +1,4 @@
-// ORIRO Scribe — defense-in-depth redaction. Runs BEFORE any byte reaches disk.
+// ORIRO Scribe, defense-in-depth redaction. Runs BEFORE any byte reaches disk.
 // Raw secrets/PII are never written; each match becomes a stable marker so the
 // journal stays useful and auditable. This is the gate that stops the scribe from
 // becoming the exact leak we exist to prevent.
@@ -24,7 +24,7 @@ const RULES: Rule[] = [
     label: "private-key",
     re: /-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----/g,
   },
-  // Lone PEM markers — a key SPLIT across fields/turns leaves only a BEGIN-head or an END-tail in
+  // Lone PEM markers, a key SPLIT across fields/turns leaves only a BEGIN-head or an END-tail in
   // one field. A field carrying either marker is key material: redact the marker + its adjacent body
   // (forward from BEGIN, backward to END) so no sub-threshold fragment can ever sit on disk.
   { label: "private-key", re: /-----BEGIN[A-Z ]*PRIVATE KEY-----[\s\S]*/g },
@@ -33,7 +33,7 @@ const RULES: Rule[] = [
   { label: "openrouter-key", re: /sk-or-v1-[A-Za-z0-9]{20,}/g },
   // Stripe-style keys (sk_live_/pk_live_/rk_test_/…), underscore segments.
   { label: "stripe-key", re: /\b[srp]k_(?:live|test)_[A-Za-z0-9]{16,}/g },
-  // Generic sk- secret keys — allow hyphenated segments (sk-live-…, sk-proj-…) so a second
+  // Generic sk- secret keys, allow hyphenated segments (sk-live-…, sk-proj-…) so a second
   // hyphen no longer breaks the match (the gap the Scriber spike caught).
   { label: "secret-key-sk", re: /sk[-_][A-Za-z0-9][A-Za-z0-9-]{14,}/g },
   { label: "google-key", re: /AIza[0-9A-Za-z_-]{30,}/g },
@@ -44,7 +44,7 @@ const RULES: Rule[] = [
   { label: "aws-key", re: /AKIA[0-9A-Z]{16}/g },
   { label: "jwt", re: /eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{6,}/g },
   { label: "telegram-token", re: /\b\d{8,10}:[A-Za-z0-9_-]{30,}\b/g },
-  // Auth headers / inline credentials (any provider) — the audit found these leaked.
+  // Auth headers / inline credentials (any provider), the audit found these leaked.
   { label: "bearer-token", re: /\bbearer\s+[A-Za-z0-9._~+/=-]{12,}/gi },
   { label: "basic-auth", re: /\bbasic\s+[A-Za-z0-9+/=]{12,}/gi },
   // key: value / key=value secrets (password, token, secret, api_key, access_key, …).
@@ -77,8 +77,8 @@ function entropy(s: string): number {
 function looksLikeUnknownSecret(token: string): boolean {
   if (token.length < 32) return false; // real bearer/session tokens are frequently 32–39 chars
   if (token.includes("⟨REDACTED:")) return false;
-  if (/^[0-9a-f]+$/i.test(token)) return false; // hex hashes/SHAs — not secrets
-  // Need ≥2 distinct charset classes — catches all-UPPERCASE+digit tokens (e.g. some API/bot
+  if (/^[0-9a-f]+$/i.test(token)) return false; // hex hashes/SHAs, not secrets
+  // Need ≥2 distinct charset classes, catches all-UPPERCASE+digit tokens (e.g. some API/bot
   // tokens) that an all-3-classes rule would miss, while still excluding plain words.
   const classes =
     (/[a-z]/.test(token) ? 1 : 0) + (/[A-Z]/.test(token) ? 1 : 0) + (/[0-9]/.test(token) ? 1 : 0);

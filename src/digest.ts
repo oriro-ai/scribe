@@ -1,12 +1,12 @@
-// ORIRO Scribe — the "markdown of the markdown": a small, always-current digest
+// ORIRO Scribe, the "markdown of the markdown": a small, always-current digest
 // distilled from the full journal, hard size-capped so it is always injectable
 // "in a flash"; plus the compact full-history timeline (≈one line per day, day
 // one → today) so the router can never forget that something happened.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { digestFile, scribeDir, timelineFile } from "./paths.js";
 
-const DIGEST_CAP = 8192; // bytes — bounded so injection never bloats the prompt
-const TIMELINE_DAY_CAP = 400; // chars per day line — keeps the skeleton tiny
+const DIGEST_CAP = 8192; // bytes, bounded so injection never bloats the prompt
+const TIMELINE_DAY_CAP = 400; // chars per day line, keeps the skeleton tiny
 
 function read(file: string): string {
   return existsSync(file) ? readFileSync(file, "utf8") : "";
@@ -28,7 +28,7 @@ export function updateDigest(summary: string, context?: string): void {
   const priorRecent = recentMatch?.[1]?.trim() ?? "";
   let recent = summary.trim() ? `- ${summary.trim()}\n${priorRecent}` : priorRecent;
 
-  const header = `# ORIRO Scribe — Digest\n\n## Context\n${contextBlock}\n\n## Recent activity (newest first)\n`;
+  const header = `# ORIRO Scribe, Digest\n\n## Context\n${contextBlock}\n\n## Recent activity (newest first)\n`;
   // Trim oldest recent lines until the whole file fits the cap.
   let out = header + recent;
   while (Buffer.byteLength(out, "utf8") > DIGEST_CAP && recent.includes("\n")) {
@@ -44,7 +44,7 @@ export function updateTimeline(date: string, topic: string): void {
   const clean = topic.replace(/\s+/g, " ").trim();
   if (!clean) return;
   const lines = read(timelineFile()).split("\n").filter(Boolean);
-  const header = "# ORIRO Scribe — Timeline";
+  const header = "# ORIRO Scribe, Timeline";
   const body = lines.filter((l) => l !== header);
   const idx = body.findIndex((l) => l.startsWith(`- ${date} ·`));
   if (idx === -1) {

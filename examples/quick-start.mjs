@@ -1,4 +1,4 @@
-// Scribe quick start — run:  node examples/quick-start.mjs
+// Scribe quick start, run:  node examples/quick-start.mjs
 // Uses a throwaway dir so it won't touch your real ~/.oriro store. Remove the ORIRO_SCRIBE_DIR line
 // to use the real on-device store.
 import { mkdtempSync } from "node:fs";
@@ -8,7 +8,7 @@ process.env.ORIRO_SCRIBE_DIR ||= mkdtempSync(join(tmpdir(), "scribe-demo-"));
 
 import { setScribeConsent, scribeTurn, buildContext, searchScribe } from "../dist/index.js";
 
-// 1) Opt in (Scribe is OFF by default — it records/injects nothing until you say yes).
+// 1) Opt in (Scribe is OFF by default, it records/injects nothing until you say yes).
 setScribeConsent(true);
 
 // 2) Record turns as you (or your agent) work. Secrets/PII are redacted BEFORE disk automatically.
@@ -19,7 +19,7 @@ scribeTurn({
   tools: ["Edit"],
 });
 scribeTurn({
-  user: "fix the rate limiter — it drops bursts",
+  user: "fix the rate limiter, it drops bursts",
   note: "switched to a token-bucket in limiter.ts",
   files: ["limiter.ts"],
   tools: ["Edit", "Bash"],

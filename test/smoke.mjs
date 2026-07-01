@@ -1,4 +1,4 @@
-// Scribe smoke test — exercises the whole engine end-to-end in a throwaway dir (never touches
+// Scribe smoke test, exercises the whole engine end-to-end in a throwaway dir (never touches
 // ~/.oriro). Run: node test/smoke.mjs   (after `npm run build`).
 import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync } from "node:fs";
@@ -13,7 +13,7 @@ const s = await import("../dist/index.js");
 const day = new Date().toISOString().slice(0, 10);
 const SECRET = "sk-ant-abcdefghijklmnopqrstuvwxyz012345";
 
-// 1) default OFF — records/injects nothing
+// 1) default OFF, records/injects nothing
 assert.equal(s.isScribeEnabled(), false, "consent must default OFF");
 assert.equal(s.buildContext(), "", "no context when OFF");
 

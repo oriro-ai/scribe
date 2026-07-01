@@ -19,7 +19,7 @@ export interface CaptureResult {
     bytes: number;
     auditClean: boolean;
 }
-/** Redact EVERY raw field of a turn record ONCE, up front — BEFORE any truncation/summarization.
+/** Redact EVERY raw field of a turn record ONCE, up front, BEFORE any truncation/summarization.
  *  (Truncating/whitespace-collapsing first defeated the multiline private-key and long-token
  *  patterns and leaked real key material into the digest/timeline/WAL.) Idempotent: re-redacting
  *  an already-redacted record is a no-op, so the WAL can safely store the redacted form. */

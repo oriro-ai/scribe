@@ -1,4 +1,4 @@
-// ORIRO Scribe — public API. A local-first, consent-gated, redacted, crash-safe work journal that
+// ORIRO Scribe, public API. A local-first, consent-gated, redacted, crash-safe work journal that
 // lets any AI router/agent stay in context across sessions. Zero runtime dependencies; pure Node.
 //
 // Quick start:

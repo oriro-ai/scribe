@@ -1,4 +1,4 @@
-// ORIRO Scribe — capture orchestrator. One straight line:
+// ORIRO Scribe, capture orchestrator. One straight line:
 //   render turn → redact → durable append → update digest + timeline → self-audit.
 // Hot-path and guaranteed; oversized content is kept in full in a side artifact
 // (referenced + excerpted) so the journal file stays bounded but nothing is lost.
@@ -73,7 +73,7 @@ function oneLineSummary(rec: TurnRecord): string {
   return bits.join(" · ") || "(activity)";
 }
 
-/** Redact EVERY raw field of a turn record ONCE, up front — BEFORE any truncation/summarization.
+/** Redact EVERY raw field of a turn record ONCE, up front, BEFORE any truncation/summarization.
  *  (Truncating/whitespace-collapsing first defeated the multiline private-key and long-token
  *  patterns and leaked real key material into the digest/timeline/WAL.) Idempotent: re-redacting
  *  an already-redacted record is a no-op, so the WAL can safely store the redacted form. */
