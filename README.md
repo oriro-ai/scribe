@@ -1,6 +1,6 @@
-# 🧠 Scribe — the memory layer for AI routers
+# 🧠 Scribe, the memory layer for every AI-Router.
 
-**A local-first, consent-gated, redacted, crash-safe work journal that lets any AI model stay in context across every session — so work is never lost and never has to start over.**
+**A local-first, consent-gated, redacted, crash-safe work journal that lets any AI model stay in context across every session so work is never lost and never has to start over.**
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE) ![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg) ![deps](https://img.shields.io/badge/runtime%20deps-0-success.svg) ![built by ORIRO](https://img.shields.io/badge/built%20by-ORIRO-black.svg)
 
@@ -10,15 +10,15 @@ Built inside the [ORIRO](https://github.com/oriro-ai) CLI, now open for everyone
 
 ## The problem: AI has amnesia
 
-Every AI assistant forgets the moment a session ends. The decisions you made, the files you changed, the bug you finally cracked, the approach you agreed on — gone. Tomorrow you re-explain, re-paste, re-derive. The model that felt like a capable collaborator yesterday shows up today as a stranger.
+Every AI assistant forgets the moment a session ends. The decisions you made, the files you changed, the bug you finally cracked, the approach you agreed on gone. Tomorrow you re-explain, re-paste, re-derive. The model that felt like a capable collaborator yesterday shows up today as a stranger.
 
 That amnesia is the single biggest reason agents feel *shallow*: brilliant for one conversation, useless as a continuous coworker. A model that forgets can't build on its own work, honor earlier decisions, or improve from what it did before.
 
-**Scribe fixes the amnesia.** It gives any AI router a durable, on-device memory of the work itself — and quietly feeds that memory back into every new session, so the model always arrives *already in context*.
+**Scribe fixes the amnesia.** It gives any AI router a durable, on-device memory of the work itself and quietly feeds that memory back into every new session, so the model always arrives *already in context*.
 
 ## The vision: every router stays in context, while it works
 
-Scribe was built on one conviction: **the AI should remember the work the way a good colleague does — automatically, privately, and without being asked.** Not a chat log in someone's cloud. A *working memory* that belongs to you, runs in the background, and is **model-agnostic** — so *any* model reads from the same memory and one can pick up exactly where another left off. Memory becomes a first-class capability, owned by the person doing the work.
+Scribe was built on one conviction: **the AI should remember the work the way a good colleague does automatically, privately, and without being asked.** Not a chat log in someone's cloud. A *working memory* that belongs to you, runs in the background, and is **model-agnostic** so *any* model reads from the same memory and one can pick up exactly where another left off. Memory becomes a first-class capability, owned by the person doing the work.
 
 ---
 
@@ -32,7 +32,7 @@ npm install github:oriro-ai/scribe
 npm install github:oriro-ai/scribe#v1.0.0
 ```
 
-> Requires Node ≥ 18. Zero runtime dependencies — Scribe is pure Node (`fs`/`path`/`os`).
+> Requires Node ≥ 18. Zero runtime dependencies Scribe is pure Node (`fs`/`path`/`os`).
 
 ## Quick start
 
@@ -41,7 +41,7 @@ import { setScribeConsent, scribeTurn, buildContext, searchScribe } from "@oriro
 
 setScribeConsent(true);                          // opt in (Scribe is OFF by default)
 
-// record a completed turn — secrets/PII are redacted BEFORE anything touches disk
+// record a completed turn secrets/PII are redacted BEFORE anything touches disk
 scribeTurn({
   user: "wire the payment webhook",
   note: "added the handler in webhook.ts",
@@ -49,27 +49,25 @@ scribeTurn({
   tools: ["Edit"],
 });
 
-// NEXT session — fold this into your prompt so the model starts already in context
-const context = buildContext();
+// NEXT session fold this into your prompt so the model starts already in context const context = buildContext();
 
-// recall past work on demand (great behind a `scribe_recall` tool your model can call)
-const hits = searchScribe("payment webhook");
-```
+// recall past work on demand (great behind a `scribe_recall` tool your model can call) const hits = searchScribe("payment webhook");
+
 
 Run the live demo: `node examples/quick-start.mjs`.
 
----
+
 
 ## What you get
 
-- **Automatic, per-turn capture.** Record every completed turn — the request, what the model did, the tools it ran, the files it touched. No manual saving.
+- **Automatic, per-turn capture.** Record every completed turn the request, what the model did, the tools it ran, the files it touched. No manual saving.
 - **Two always-fresh views of memory:**
-  - a **rolling digest** — the "markdown of the markdown," hard-capped in size so it injects into any prompt *in a flash*;
-  - a **full-history timeline** — ~one line per day, day one → today, so the router can never forget that something happened.
+  - a **rolling digest** the "markdown of the markdown," hard-capped in size so it injects into any prompt *in a flash*;
+  - a **full-history timeline** ~one line per day, day one → today, so the router can never forget that something happened.
 - **No-fail context injection.** `buildContext()` reads the timeline + digest **straight off disk** — decoupled from the writer, so the model gets its context even mid-recovery.
-- **On-demand recall.** Full-text search across every day (`searchScribe`), or read a whole day (`readDay`) — expose it to your model as a `scribe_recall` tool and it recovers its own decisions, code, and files.
-- **Defense-in-depth redaction — before disk.** Every field is scrubbed for secrets/PII *before a byte is written*: private keys, provider API keys, tokens, JWTs, emails, phones, URL credentials → stable `⟨REDACTED:label⟩` markers, with a post-write self-audit. **The memory can never become the leak.**
-- **Crash-safe, zero-loss durability.** Synchronous, `fsync`'d writes + a write-ahead log (pending → commit), so a captured turn is never lost — not even on a crash.
+- **On-demand recall.** Full-text search across every day (`searchScribe`), or read a whole day (`readDay`) expose it to your model as a `scribe_recall` tool and it recovers its own decisions, code, and files.
+- **Defense-in-depth redaction before disk.** Every field is scrubbed for secrets/PII *before a byte is written*: private keys, provider API keys, tokens, JWTs, emails, phones, URL credentials → stable `⟨REDACTED:label⟩` markers, with a post-write self-audit. **The memory can never become the leak.**
+- **Crash-safe, zero-loss durability.** Synchronous, `fsync`'d writes + a write-ahead log (pending → commit), so a captured turn is never lost not even on a crash.
 - **A self-healing, three-role writer.** **Primary** writes; **Standby** instantly retries on failure (the entry is already safe in the WAL); **Medic** logs the fault and replays pending WAL entries across crashes/restarts. It **never throws into your turn**.
 - **Consent-gated + reversible.** Off by default; one call to opt in, one to opt out. Local, inspectable, reversible.
 - **Model-agnostic + deterministic.** No LLM runs the memory — plain, auditable logic that behaves identically for every router.
@@ -140,7 +138,7 @@ Full types ship with the package (`.d.ts`).
 ## Guarantees (never compromised)
 
 - **Local-only.** Everything stays under `~/.oriro/scribe/`. Nothing is ever uploaded, synced, or sent anywhere.
-- **Redacted before disk.** Raw secrets/PII never persist — replaced with markers before the write, re-audited after.
+- **Redacted before disk.** Raw secrets/PII never persist replaced with markers before the write, re-audited after.
 - **Consent-gated, default OFF.** Records/injects nothing until you opt in; reversible any time.
 - **Crash-safe.** WAL + self-healing writer; capture never throws and never loses a committed turn.
 
